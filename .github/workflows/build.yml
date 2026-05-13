@@ -1,5 +1,8 @@
 name: Build Windows executable
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
   push:
@@ -42,4 +45,3 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: city_name_game.zip
-          generate_release_notes: true
