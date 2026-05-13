@@ -45,8 +45,13 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-The workflow uploads `city_name_game.exe` as a build artifact, which you can
-download from the repository's Actions page.
+When a tag is pushed (e.g. `v1.0.0`), the workflow fully automatically:
+1. Builds `city_name_game.exe`
+2. Packs it together with `cities.txt` into `city_name_game.zip`
+3. Creates a **GitHub Release** and attaches the zip
+
+No manual steps needed — just push a tag and the Release appears on the
+Releases page of your repo, ready for anyone to download.
 
 ### Usage
 

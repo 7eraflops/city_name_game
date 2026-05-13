@@ -19,15 +19,27 @@ jobs:
           python-version: "3.13"
 
       - name: Install dependencies
-        run: |
-          pip install pyinstaller
+        run: pip install pyinstaller
 
       - name: Build executable
+        run: pyinstaller city_name_game.spec
+
+      - name: Package release zip
         run: |
-          pyinstaller city_name_game.spec
+          mkdir city_name_game
+          copy dist\city_name_game.exe city_name_game\
+          copy cities.txt city_name_game\
+          powershell Compress-Archive -Path city_name_game -DestinationPath city_name_game.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: city_name_game
-          path: dist/city_name_game.exe
+          path: city_name_game.zip
+
+      - name: Create release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: city_name_game.zip
+          generate_release_notes: true
