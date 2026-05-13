@@ -1,0 +1,7 @@
+[project]
+name = "city-name-game"
+version = "0.1.0"
+description = "Simple graph theory based solver for the city name game."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
