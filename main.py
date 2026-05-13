@@ -38,14 +38,18 @@ def interactive() -> None:
 
     if not input_path.exists():
         print(f"Error: Input file not found: {input_path}", file=sys.stderr)
-        sys.exit(2)
+        input("\nPress Enter to exit...")
+        return
 
     val = input("Validate against reference places? (Y/n): ").strip().lower()
     validate = val != "n"
 
     output_path = input_path.parent / "output.txt"
 
-    run(input_path, output_path, validate)
+    try:
+        run(input_path, output_path, validate)
+    except SystemExit:
+        pass
 
     input("\nPress Enter to exit...")
 

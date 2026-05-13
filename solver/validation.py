@@ -56,6 +56,19 @@ def validate_graph(
     if not graph.cities:
         return ValidationResult(False, "No cities in input file")
 
+    seen: set[str] = set()
+    dupes: list[str] = []
+    for city in graph.cities:
+        key = city.lower().strip()
+        if key in seen:
+            dupes.append(city.strip())
+        seen.add(key)
+    if dupes:
+        return ValidationResult(
+            False,
+            f"Duplicate cities: {', '.join(dupes[:5])}{'...' if len(dupes) > 5 else ''}",
+        )
+
     if reference_places:
         unknown = []
         for city in graph.cities:

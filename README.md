@@ -27,32 +27,6 @@ A standalone `.exe` can be built with [PyInstaller](https://pyinstaller.org/).
 The executable bundles Python itself and `places_reference.json`, so no
 interpreter or extra files are needed.
 
-### Build locally
-
-```cmd
-pip install pyinstaller
-pyinstaller city_name_game.spec
-```
-
-The `.exe` is created at `dist/city_name_game.exe`.
-
-### Build via GitHub Actions
-
-Push a tag to trigger an automated build:
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
-When a tag is pushed (e.g. `v1.0.0`), the workflow fully automatically:
-1. Builds `city_name_game.exe`
-2. Packs it together with `cities.txt` into `city_name_game.zip`
-3. Creates a **GitHub Release** and attaches the zip
-
-No manual steps needed — just push a tag and the Release appears on the
-Releases page of your repo, ready for anyone to download.
-
 ### Usage
 
 When you run `city_name_game.exe` without arguments it enters **interactive mode**:
@@ -111,6 +85,3 @@ If validation passes, `main.py` computes the path, prints it to stdout, and writ
 - `cities.txt`: example input
 - `places_reference.json`: reference list of Polish place names used for validation
 - `solver/graph.py`, `solver/validation.py`, `solver/eulerian.py`: core implementation
-
-
-Enjoy! Feel free to modify `cities.txt` and rerun the script to try different inputs.
